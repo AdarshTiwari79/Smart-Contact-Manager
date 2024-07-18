@@ -11,6 +11,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class User {
@@ -18,14 +21,26 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@NotBlank(message = "Name field should not be empty !")
+	@Size(min = 2, max = 20, message = "Name should be in between 2 and 20 characters !")
 	private String name;
 	@Column(unique = true)
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "invalid email format !!")
 	private String email;
+	
+	@NotBlank(message = "Password is mandatory")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
+    @Pattern(regexp = "^(?=.*[A-Z]).+$", message = "Password must contain at least one uppercase letter")
+    @Pattern(regexp = "^(?=.*\\d).+$", message = "Password must contain at least one digit")
+    @Pattern(regexp = "^(?=.*[@$!%*?&]).+$", message = "Password must contain at least one special character")
 	private String password;
 	private String role;
 	private boolean enabled;
 	private String imageUrl;
 	@Column(length = 500)
+	@NotBlank(message = "About field should not be empty !")
+	@Size(min = 20, message = "minimum 20 characters !!")
 	private String about;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
