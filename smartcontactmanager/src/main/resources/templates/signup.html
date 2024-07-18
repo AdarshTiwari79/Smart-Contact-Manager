@@ -33,7 +33,11 @@
 							<div class="form-group mt-4">
 								<label for="name_field" class="form-label">Your Name</label> <input
 									type="text" class="form-control" id="name_field" name="name"
-									placeholder="Enter your name" th:value="${user.name}" required>
+									placeholder="Enter your name" th:value="${user.name}"
+									th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+
+								<div th:each="e : ${#fields.errors('name')}" th:text="${e}"
+									class="invalid-feedback"></div>
 							</div>
 
 							<!-- Email Field -->
@@ -41,7 +45,10 @@
 								<label for="email_field" class="form-label">Your Email</label> <input
 									type="email" class="form-control" id="email_field" name="email"
 									placeholder="Enter your email" th:value="${user.email}"
-									required>
+									th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''">
+
+								<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
+									class="invalid-feedback"></div>
 							</div>
 
 							<!-- Password Field -->
@@ -49,7 +56,11 @@
 								<label for="password_field" class="form-label">Your
 									Password</label> <input type="password" class="form-control"
 									name="password" id="password_field"
-									placeholder="Enter your Password">
+									placeholder="Enter your Password"
+									th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''">
+
+								<div th:each="e : ${#fields.errors('password')}" th:text="${e}"
+									class="invalid-feedback"></div>
 							</div>
 
 							<!-- User About field -->
@@ -58,7 +69,11 @@
 									Yourself</label>
 								<textarea rows="5" class="form-control" id="textarea_field"
 									placeholder="Enter something about yourself" name="about"
-									th:value="${user.about}"></textarea>
+									th:text="${user.about}"
+									th:classappend="${#fields.hasErrors('about')} ? 'is-invalid' : ''"></textarea>
+
+								<div th:each="e : ${#fields.errors('about')}" th:text="${e}"
+									class="invalid-feedback"></div>
 							</div>
 
 							<!-- terms and condition -->
