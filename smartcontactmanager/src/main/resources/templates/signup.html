@@ -13,33 +13,43 @@
 
 					<div class="my-card mt-2 mb-2">
 
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}" class="alert"
+							role="alert" th:object="${useSession}">
+							<p class="text-center" th:text="${session.message.content}"></p>
+							<th:block th:text="${useSession.removeAttribute('message')}"></th:block>
+						</div>
+
 						<div class="container text-center">
 							<img src="" th:src="@{/images/registration.png}"
 								alt="registration icon" style="width: 60px;" />
 						</div>
 						<h1 class="text-center mt-2">Registration</h1>
 
-						<form th:action="@{/do_register}" method="post">
+						<form th:action="@{/do_register}" method="post"
+							th:object="${user}">
 
 							<!-- Name Field -->
 							<div class="form-group mt-4">
 								<label for="name_field" class="form-label">Your Name</label> <input
-									type="text" class="form-control" id="name_field"
-									placeholder="Enter your name" required>
+									type="text" class="form-control" id="name_field" name="name"
+									placeholder="Enter your name" th:value="${user.name}" required>
 							</div>
 
 							<!-- Email Field -->
 							<div class="form-group mt-3">
 								<label for="email_field" class="form-label">Your Email</label> <input
-									type="email" class="form-control" id="email_field"
-									placeholder="Enter your email">
+									type="email" class="form-control" id="email_field" name="email"
+									placeholder="Enter your email" th:value="${user.email}"
+									required>
 							</div>
 
 							<!-- Password Field -->
 							<div class="form-group mt-3">
 								<label for="password_field" class="form-label">Your
 									Password</label> <input type="password" class="form-control"
-									id="password_field" placeholder="Enter your Password">
+									name="password" id="password_field"
+									placeholder="Enter your Password">
 							</div>
 
 							<!-- User About field -->
@@ -47,11 +57,20 @@
 								<label for="textarea_field" class="form-label">About
 									Yourself</label>
 								<textarea rows="5" class="form-control" id="textarea_field"
-									placeholder="Enter something about yourself"></textarea>
+									placeholder="Enter something about yourself" name="about"
+									th:value="${user.about}"></textarea>
 							</div>
 
+							<!-- terms and condition -->
+							<div class="form-group form-check mt-2">
+								<label for="checkbox_field" class="form-label">Accept
+									terms and conditions</label> <input type="checkbox"
+									class="form-check-input" id="checkbox_field" name="agreement" />
+							</div>
+
+
 							<!-- submit button -->
-							<div class="container mt-4 text-center">
+							<div class="container mt-2 text-center">
 								<button class="btn bg-primary text-white me-2" type="submit">Submit</button>
 
 								<!-- reset button -->
