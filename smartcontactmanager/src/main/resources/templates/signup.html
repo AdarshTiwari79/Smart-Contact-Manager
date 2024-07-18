@@ -6,11 +6,65 @@
 <title>Register</title>
 </head>
 <body>
-	<section
-		class="d-flex justify-content-center align-items-center">
-		<div class="text-center">
-			<h1 class="font-weight-bold">This is signup page</h1>
-			
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+
+					<div class="my-card mt-2 mb-2">
+
+						<div class="container text-center">
+							<img src="" th:src="@{/images/registration.png}"
+								alt="registration icon" style="width: 60px;" />
+						</div>
+						<h1 class="text-center mt-2">Registration</h1>
+
+						<form th:action="@{/do_register}" method="post">
+
+							<!-- Name Field -->
+							<div class="form-group mt-4">
+								<label for="name_field" class="form-label">Your Name</label> <input
+									type="text" class="form-control" id="name_field"
+									placeholder="Enter your name" required>
+							</div>
+
+							<!-- Email Field -->
+							<div class="form-group mt-3">
+								<label for="email_field" class="form-label">Your Email</label> <input
+									type="email" class="form-control" id="email_field"
+									placeholder="Enter your email">
+							</div>
+
+							<!-- Password Field -->
+							<div class="form-group mt-3">
+								<label for="password_field" class="form-label">Your
+									Password</label> <input type="password" class="form-control"
+									id="password_field" placeholder="Enter your Password">
+							</div>
+
+							<!-- User About field -->
+							<div class="form-group mt-3">
+								<label for="textarea_field" class="form-label">About
+									Yourself</label>
+								<textarea rows="5" class="form-control" id="textarea_field"
+									placeholder="Enter something about yourself"></textarea>
+							</div>
+
+							<!-- submit button -->
+							<div class="container mt-4 text-center">
+								<button class="btn bg-primary text-white me-2" type="submit">Submit</button>
+
+								<!-- reset button -->
+								<button class="btn btn-warning text-white" type="reset">Reset</button>
+							</div>
+
+
+						</form>
+					</div>
+
+
+				</div>
+			</div>
 		</div>
 	</section>
 </body>
