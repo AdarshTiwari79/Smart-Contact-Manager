@@ -3,6 +3,7 @@ package com.smart.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import com.smart.entities.User;
 import com.smart.helper.Message;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class MainController {
@@ -44,13 +46,18 @@ public class MainController {
 
 	// handler for registration data comes from form field
 	@PostMapping("/do_register")
-	public String registerUser(@ModelAttribute("user") User user,
+	public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bResult,
 			@RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model model, HttpSession session) {
 
 		try {
 			if (!agreement) {
 				System.out.println("terms and conditions are not agreed");
 				throw new Exception("You have not agreed the terms and conditions");
+			}
+			
+			if(bResult.hasErrors()) {
+				System.out.println(bResult);
+				return "signup";
 			}
 
 			user.setRole("ROLE_USER");
